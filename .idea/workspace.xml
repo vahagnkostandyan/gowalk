@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="94774b6d-5257-4c1e-b651-b191408db508" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mvnw" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mvnw.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/bnak/gowalk/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/bnak/gowalk/config/GoWalkBeans.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/bnak/gowalk/config/SecurityConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/bnak/gowalk/controller/StoryFinderController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/bnak/gowalk/dto/GetStoryRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/bnak/gowalk/dto/GuideTalk.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/bnak/gowalk/dto/GuideTopic.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/bnak/gowalk/dto/Mode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/bnak/gowalk/dto/POISearchRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/bnak/gowalk/dto/POISearchResult.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/bnak/gowalk/dto/Story.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/bnak/gowalk/facade/StoryFinderFacade.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/bnak/gowalk/facade/impl/SimpleStoryFinderFacadeImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/bnak/gowalk/service/GuideService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/bnak/gowalk/service/PointOfInterestsService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/bnak/gowalk/service/TextToSpeechService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/bnak/gowalk/service/impl/GoogleMapsPointOfInterestService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/bnak/gowalk/service/impl/OpenAIGuideService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Enum" />
+        <option value="Record" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="workspaceImportEnabled" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="2N5KqDXydtgrPs9l5fXFqzq0K6L" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "spring.configuration.checksum": "396c29dbd8f47c6295a510e93af23bc7",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="ReactorSettings">
+    <option name="notificationShown" value="true" />
+  </component>
+  <component name="RunManager">
+    <configuration name="Main" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="gowalk" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="io.bnak.gowalk.Main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="io.bnak.gowalk.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Spring Boot.Main" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="94774b6d-5257-4c1e-b651-b191408db508" name="Changes" comment="" />
+      <created>1678948693718</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1678948693718</updated>
+      <workItem from="1678948694988" duration="2476000" />
+      <workItem from="1678962809102" duration="10780000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

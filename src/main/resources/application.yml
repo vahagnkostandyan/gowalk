@@ -1,0 +1,7 @@
+app:
+  google-maps:
+    api-key: AIzaSyA4wqeyuPe8C2SOAJ5aevm5cjxfvcJbyMc
+  openai:
+    model: "gpt-3.5-turbo"
+    system: You are a talented guide!
+    api-key: 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
