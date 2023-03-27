@@ -5,3 +5,16 @@ app:
     model: "gpt-3.5-turbo"
     system: You are a talented guide!
     api-key: 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
+
+spring:
+  r2dbc:
+    username: gowalk
+    password: gowalk-pass
+    url: r2dbc:postgresql://localhost:5432/gowalk-db
+    pool:
+      enabled: true
+      initial-size: 5
+      max-size: 10
+  flyway:
+    url: jdbc:postgresql://localhost:5432/gowalk-db
+    locations: classpath:db/postgres/migration
