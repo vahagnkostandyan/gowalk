@@ -40,7 +40,7 @@ public class GoogleMapsPointOfInterestService implements PointOfInterestsService
 
         return placesSearchResponses.stream()
                 .flatMap(places -> Arrays.stream(places.results))
-                .map(result -> new POISearchResult(result.name, List.of(result.types), result.rating))
+                .map(result -> new POISearchResult(result.name, List.of(result.types), result.rating, result.placeId))
                 .collect(Collectors.toList());
     }
 
@@ -48,7 +48,7 @@ public class GoogleMapsPointOfInterestService implements PointOfInterestsService
     public List<POISearchResult> searchPOIs(POISearchRequest poiSearchRequest) {
         PlacesSearchResponse placesSearchResponse = searchPlaces(poiSearchRequest, null);
         return Arrays.stream(placesSearchResponse.results)
-                .map(result -> new POISearchResult(result.name, List.of(result.types), result.rating))
+                .map(result -> new POISearchResult(result.name, List.of(result.types), result.rating, result.placeId))
                 .collect(Collectors.toList());
     }
 
@@ -59,7 +59,7 @@ public class GoogleMapsPointOfInterestService implements PointOfInterestsService
             return null;
         }
         PlacesSearchResult result = placesSearchResponse.results[0];
-        return new POISearchResult(result.name, List.of(result.types), result.rating);
+        return new POISearchResult(result.name, List.of(result.types), result.rating, result.placeId);
     }
 
     private PlacesSearchResponse searchPlaces(POISearchRequest poiSearchRequest, String pageToken) {

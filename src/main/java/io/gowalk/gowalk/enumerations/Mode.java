@@ -1,4 +1,4 @@
-package io.gowalk.gowalk.dto;
+package io.gowalk.gowalk.enumerations;
 
 import lombok.Getter;
 

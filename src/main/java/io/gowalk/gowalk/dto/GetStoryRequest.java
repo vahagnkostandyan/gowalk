@@ -1,5 +1,6 @@
 package io.gowalk.gowalk.dto;
 
+import io.gowalk.gowalk.enumerations.Mode;
 import lombok.Data;
 import org.springframework.validation.annotation.Validated;
 
