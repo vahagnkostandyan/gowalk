@@ -7,6 +7,8 @@ app:
     api-key: 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
 
 spring:
+  application:
+    name: gowalk
   r2dbc:
     username: gowalk
     password: gowalk-pass
@@ -18,3 +20,10 @@ spring:
   flyway:
     url: jdbc:postgresql://localhost:5432/gowalk-db
     locations: classpath:db/postgres/migration
+
+springdoc:
+  swagger-ui:
+    path: /docs/swagger-ui
+  api-docs:
+    path: /docs/api-docs
+  paths-to-match: /

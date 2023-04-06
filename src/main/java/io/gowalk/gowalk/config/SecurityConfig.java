@@ -2,6 +2,7 @@ package io.gowalk.gowalk.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.web.server.SecurityWebFilterChain;
@@ -17,8 +18,18 @@ public class SecurityConfig {
     @Bean
     public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
         return http.authorizeExchange()
-                .anyExchange()
+                .pathMatchers("/docs/**", "/v3/api-docs/**")
                 .permitAll()
+                .pathMatchers("/actuator/health")
+                .permitAll()
+                .pathMatchers(HttpMethod.OPTIONS)
+                .permitAll()
+                .anyExchange()
+                .authenticated()
+                .and()
+                .oauth2ResourceServer()
+                .jwt()
+                .and()
                 .and()
                 .csrf()
                 .disable()

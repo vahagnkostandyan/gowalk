@@ -7,6 +7,14 @@ app:
     api-key: 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
 
 spring:
+  application:
+    name: gowalk
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: ${JWT_PUBLIC_KEY_URI:https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com}
+          issuer-uri: ${ISSUER_URL:https://securetoken.google.com/gowalk-380915}
   r2dbc:
     username: gowalk
     password: gowalk-pass
@@ -18,3 +26,10 @@ spring:
   flyway:
     url: jdbc:postgresql://localhost:5432/gowalk-db
     locations: classpath:db/postgres/migration
+
+springdoc:
+  swagger-ui:
+    path: /docs/swagger-ui
+  api-docs:
+    path: /docs/api-docs
+  paths-to-match: /
