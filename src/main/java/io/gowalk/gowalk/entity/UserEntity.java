@@ -14,6 +14,9 @@ public class UserEntity {
     @Id
     private Long id;
 
+    @Column(value = "local_id")
+    private String localId;
+
     @Column(value = "email")
     private String email;
 

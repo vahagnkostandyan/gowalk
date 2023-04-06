@@ -10,7 +10,7 @@ import reactor.core.publisher.Mono;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/story")
+@RequestMapping("/api/v1/stories")
 @RequiredArgsConstructor
 public class StoryFinderController {
     private final StoryFinderFacade storyFinderFacade;

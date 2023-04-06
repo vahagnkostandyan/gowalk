@@ -1,6 +1,7 @@
 CREATE TABLE IF NOT EXISTS "users"
 (
     id serial PRIMARY KEY,
+    local_id varchar(63) not null unique,
     email varchar(255) unique not null,
     created_date TIMESTAMP NOT NULL
 );
@@ -21,6 +22,8 @@ CREATE TABLE IF NOT EXISTS "users_interests_table"
     FOREIGN KEY (interest_id)
         REFERENCES interests (id)
 );
+
+CREATE INDEX users_interests_table_user_id_index ON users_interests_table (user_id);
 
 CREATE TABLE IF NOT EXISTS "places"
 (
