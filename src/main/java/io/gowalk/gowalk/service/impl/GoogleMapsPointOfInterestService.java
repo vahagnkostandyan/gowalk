@@ -13,6 +13,8 @@ import io.gowalk.gowalk.service.PointOfInterestsService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,38 +30,33 @@ public class GoogleMapsPointOfInterestService implements PointOfInterestsService
     private String apiKey;
 
     @Override
-    public List<POISearchResult> searchAllAvailablePOIs(POISearchRequest poiSearchRequest) {
-        final List<PlacesSearchResponse> placesSearchResponses = new ArrayList<>();
-        PlacesSearchResponse placesSearchResponse = searchPlaces(poiSearchRequest, null);
-        placesSearchResponses.add(placesSearchResponse);
-
-        while (Objects.nonNull(placesSearchResponse.nextPageToken)) {
-            placesSearchResponse = searchPlaces(poiSearchRequest, placesSearchResponse.nextPageToken);
-            placesSearchResponses.add(placesSearchResponse);
-        }
-
-        return placesSearchResponses.stream()
-                .flatMap(places -> Arrays.stream(places.results))
-                .map(result -> new POISearchResult(result.name, List.of(result.types), result.rating, result.placeId))
-                .collect(Collectors.toList());
+    public Flux<POISearchResult> searchAllAvailablePOIs(POISearchRequest poiSearchRequest) {
+        return Mono.fromCallable(() -> searchPlaces(poiSearchRequest, null))
+                .expand(placesSearchResponse -> {
+                    if (Objects.nonNull(placesSearchResponse.nextPageToken)) {
+                        return Mono.fromCallable(() -> searchPlaces(poiSearchRequest, placesSearchResponse.nextPageToken));
+                    }
+                    return Mono.empty();
+                })
+                .filter(placesSearchResponse -> placesSearchResponse.results.length > 0)
+                .flatMap(placesSearchResponse -> Flux.fromArray(placesSearchResponse.results))
+                .map(result -> new POISearchResult(result.name, List.of(result.types), result.rating, result.placeId));
     }
 
     @Override
-    public List<POISearchResult> searchPOIs(POISearchRequest poiSearchRequest) {
-        PlacesSearchResponse placesSearchResponse = searchPlaces(poiSearchRequest, null);
-        return Arrays.stream(placesSearchResponse.results)
-                .map(result -> new POISearchResult(result.name, List.of(result.types), result.rating, result.placeId))
-                .collect(Collectors.toList());
+    public Flux<POISearchResult> searchPOIs(POISearchRequest poiSearchRequest) {
+        return Mono.fromCallable(() -> searchPlaces(poiSearchRequest, null))
+                .filter(placesSearchResponse -> placesSearchResponse.results.length > 0)
+                .flatMapMany(placesSearchResponse -> Flux.fromArray(placesSearchResponse.results))
+                .map(result -> new POISearchResult(result.name, List.of(result.types), result.rating, result.placeId));
     }
 
     @Override
-    public POISearchResult searchNearestPOI(POISearchRequest poiSearchRequest) {
-        PlacesSearchResponse placesSearchResponse = searchPlaces(poiSearchRequest, null);
-        if (placesSearchResponse.results.length == 0) {
-            return null;
-        }
-        PlacesSearchResult result = placesSearchResponse.results[0];
-        return new POISearchResult(result.name, List.of(result.types), result.rating, result.placeId);
+    public Mono<POISearchResult> searchNearestPOI(POISearchRequest poiSearchRequest) {
+        return Mono.fromCallable(() -> searchPlaces(poiSearchRequest, null))
+                .filter(placesSearchResponse -> placesSearchResponse.results.length > 0)
+                .map(placesSearchResponse -> placesSearchResponse.results[0])
+                .map(result -> new POISearchResult(result.name, List.of(result.types), result.rating, result.placeId));
     }
 
     private PlacesSearchResponse searchPlaces(POISearchRequest poiSearchRequest, String pageToken) {

@@ -9,6 +9,9 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtAut
 import java.util.List;
 import java.util.Map;
 
+import static io.gowalk.gowalk.util.Constants.EMAIL;
+import static io.gowalk.gowalk.util.Constants.USER_ID;
+
 @Mapper(componentModel = "spring")
 public interface UserMapper {
     User fromUserEntity(UserEntity userEntity, List<Interest> interests);
@@ -18,8 +21,8 @@ public interface UserMapper {
     default User fromAuthenticationAndInterests(JwtAuthenticationToken authentication, List<Interest> interests) {
         final Map<String, Object> tokenAttributes = authentication.getTokenAttributes();
         final User user = new User();
-        user.setEmail((String) tokenAttributes.get("email"));
-        user.setLocalId((String) tokenAttributes.get("user_id"));
+        user.setEmail((String) tokenAttributes.get(EMAIL));
+        user.setLocalId((String) tokenAttributes.get(USER_ID));
         user.setInterests(interests);
         return user;
     }

@@ -1,5 +1,6 @@
 package io.gowalk.gowalk.exception;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.web.WebProperties;
 import org.springframework.boot.autoconfigure.web.reactive.error.AbstractErrorWebExceptionHandler;
 import org.springframework.boot.web.error.ErrorAttributeOptions;
@@ -18,6 +19,7 @@ import java.util.Map;
 
 @Component
 @Order(-2)
+@Slf4j
 public class GlobalErrorWebExceptionHandler extends
         AbstractErrorWebExceptionHandler {
 
@@ -38,7 +40,8 @@ public class GlobalErrorWebExceptionHandler extends
 
     private Mono<ServerResponse> renderErrorResponse(
             ServerRequest request) {
-
+        Throwable error = getError(request);
+        log.error(error.getMessage(), error);
         Map<String, Object> errorPropertiesMap = getErrorAttributes(request,
                 ErrorAttributeOptions.defaults());
 

@@ -17,6 +17,6 @@ public class StoryFinderController {
 
     @PostMapping
     public Mono<Story> getAnyStory(@RequestBody @Valid GetStoryRequest getStoryRequest) {
-        return Mono.just(storyFinderFacade.findStory(getStoryRequest));
+        return storyFinderFacade.findStory(getStoryRequest);
     }
 }

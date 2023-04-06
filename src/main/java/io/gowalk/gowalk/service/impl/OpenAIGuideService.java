@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Mono;
 
 import javax.annotation.PostConstruct;
 import java.util.Collection;
@@ -35,7 +36,7 @@ public class OpenAIGuideService implements GuideService {
     }
 
     @Override
-    public GuideTalk tellAbout(GuideTopic topic) {
+    public Mono<GuideTalk> tellAbout(GuideTopic topic) {
         ChatMessage chatMessage = new ChatMessage(ChatMessageRole.USER.value(), topic.topic());
         List<ChatMessage> assistantMessages = topic.previousMessages().stream()
                 .map(conversation ->
@@ -51,9 +52,8 @@ public class OpenAIGuideService implements GuideService {
                 .messages(assistantMessages)
                 .model(model)
                 .build();
-        ChatCompletionResult chatCompletion = openAiService.createChatCompletion(completionRequest);
-        ChatCompletionChoice chatCompletionChoice = chatCompletion.getChoices().get(0);
-        ChatMessage message = chatCompletionChoice.getMessage();
-        return new GuideTalk(topic.topic(), message.getContent());
+        return Mono.fromCallable(() -> openAiService.createChatCompletion(completionRequest))
+                .map(chatCompletion -> chatCompletion.getChoices().get(0).getMessage())
+                .map(message -> new GuideTalk(topic.topic(), message.getContent()));
     }
 }
