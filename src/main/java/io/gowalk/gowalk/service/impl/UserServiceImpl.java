@@ -1,5 +1,8 @@
 package io.gowalk.gowalk.service.impl;
 
+import io.gowalk.gowalk.exception.GetUserException;
+import io.gowalk.gowalk.exception.GoWalkException;
+import io.gowalk.gowalk.exception.UserCreatingException;
 import io.gowalk.gowalk.mapper.UserMapper;
 import io.gowalk.gowalk.model.User;
 import io.gowalk.gowalk.repository.UserRepository;
@@ -25,7 +28,9 @@ public class UserServiceImpl implements UserService {
         return userRepository.findById(id)
                 .flatMap(userEntity -> interestService.getInterests(userEntity.getId())
                         .collectList()
-                        .map(interests -> userMapper.fromUserEntity(userEntity, interests)));
+                        .map(interests -> userMapper.fromUserEntity(userEntity, interests)))
+                .doOnError(ex -> log.error(ex.getMessage(), ex))
+                .onErrorMap(ex -> !(ex instanceof GoWalkException), GetUserException::new);
     }
 
     @Override
@@ -33,7 +38,9 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByLocalId(localId)
                 .flatMap(userEntity -> interestService.getInterests(userEntity.getId())
                         .collectList()
-                        .map(interests -> userMapper.fromUserEntity(userEntity, interests)));
+                        .map(interests -> userMapper.fromUserEntity(userEntity, interests)))
+                .doOnError(ex -> log.error(ex.getMessage(), ex))
+                .onErrorMap(ex -> !(ex instanceof GoWalkException), GetUserException::new);
     }
 
     @Override
@@ -41,7 +48,9 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByEmail(email)
                 .flatMap(userEntity -> interestService.getInterests(userEntity.getId())
                         .collectList()
-                        .map(interests -> userMapper.fromUserEntity(userEntity, interests)));
+                        .map(interests -> userMapper.fromUserEntity(userEntity, interests)))
+                .doOnError(ex -> log.error(ex.getMessage(), ex))
+                .onErrorMap(ex -> !(ex instanceof GoWalkException), GetUserException::new);
     }
 
     @Override
@@ -55,6 +64,9 @@ public class UserServiceImpl implements UserService {
                                 user.setInterests(interests);
                                 return user;
                             });
-                });
+                })
+                .doOnError(ex -> log.error(ex.getMessage(), ex))
+                .switchIfEmpty(Mono.error(UserCreatingException::new))
+                .onErrorMap(ex -> !(ex instanceof GoWalkException), UserCreatingException::new);
     }
 }

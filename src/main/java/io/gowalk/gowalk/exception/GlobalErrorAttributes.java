@@ -17,6 +17,13 @@ public class GlobalErrorAttributes extends DefaultErrorAttributes {
         Map<String, Object> map = super.getErrorAttributes(
                 request, options);
         Throwable error = getError(request);
+
+        if (error instanceof GoWalkException ex) {
+            map.put("status", HttpStatus.BAD_REQUEST);
+            map.put("message", ex.getMessage());
+            return map;
+        }
+
         map.put("status", HttpStatus.BAD_REQUEST);
         map.put("message", "Something went wrong.");
         return map;
